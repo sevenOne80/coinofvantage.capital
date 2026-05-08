@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}Investor Portal — CoinOfVantage{% endblock %}
+{% block content %}
+
+<section class="portal-section">
+  <div class="container">
+    <div class="portal-header">
+      <div>
+        <div class="section-label">Investor Portal</div>
+        <h1>Welcome, {{ name }}</h1>
+      </div>
+      <a href="{{ url_for('logout') }}" class="btn btn-ghost">Log Out</a>
+    </div>
+
+    <div class="portal-grid">
+
+      <div class="portal-card portal-card-wide">
+        <div class="portal-card-header">
+          <h3>Portfolio Overview</h3>
+          <span class="badge badge-live">● Live</span>
+        </div>
+        <div class="portal-stats">
+          <div class="p-stat">
+            <div class="p-stat-label">NAV per Share</div>
+            <div class="p-stat-value">€1,084.22</div>
+            <div class="p-stat-change positive">+8.4% YTD</div>
+          </div>
+          <div class="p-stat">
+            <div class="p-stat-label">Your Investment</div>
+            <div class="p-stat-value">€—</div>
+            <div class="p-stat-change">As of last statement</div>
+          </div>
+          <div class="p-stat">
+            <div class="p-stat-label">Fund AUM</div>
+            <div class="p-stat-value">Confidential</div>
+            <div class="p-stat-change">Available on request</div>
+          </div>
+          <div class="p-stat">
+            <div class="p-stat-label">Next NAV Date</div>
+            <div class="p-stat-value">01 Apr 2026</div>
+            <div class="p-stat-change">Monthly valuation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <div class="portal-card-header">
+          <h3>Documents</h3>
+        </div>
+        <ul class="doc-list">
+          <li class="doc-item">
+            <div class="doc-icon">📄</div>
+            <div class="doc-info">
+              <div class="doc-name">Private Placement Memorandum</div>
+              <div class="doc-meta">PDF · Updated Jan 2026</div>
+            </div>
+            <a href="#" class="doc-download">↓</a>
+          </li>
+          <li class="doc-item">
+            <div class="doc-icon">📊</div>
+            <div class="doc-info">
+              <div class="doc-name">Q4 2025 Investor Letter</div>
+              <div class="doc-meta">PDF · Feb 2026</div>
+            </div>
+            <a href="#" class="doc-download">↓</a>
+          </li>
+          <li class="doc-item">
+            <div class="doc-icon">📋</div>
+            <div class="doc-info">
+              <div class="doc-name">Subscription Agreement</div>
+              <div class="doc-meta">PDF · Docusign ready</div>
+            </div>
+            <a href="#" class="doc-download">↓</a>
+          </li>
+          <li class="doc-item">
+            <div class="doc-icon">🔒</div>
+            <div class="doc-info">
+              <div class="doc-name">KYC / Onboarding Form</div>
+              <div class="doc-meta">PDF · Required</div>
+            </div>
+            <a href="#" class="doc-download">↓</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="portal-card">
+        <div class="portal-card-header">
+          <h3>Monthly NAV History</h3>
+        </div>
+        <table class="nav-table">
+          <thead>
+            <tr><th>Month</th><th>NAV/Share</th><th>Return</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mar 2026</td><td>€1,084.22</td><td class="positive">+2.1%</td></tr>
+            <tr><td>Feb 2026</td><td>€1,061.90</td><td class="positive">+3.4%</td></tr>
+            <tr><td>Jan 2026</td><td>€1,027.00</td><td class="positive">+2.7%</td></tr>
+            <tr><td>Dec 2025</td><td>€1,000.00</td><td>Inception</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="portal-card">
+        <div class="portal-card-header">
+          <h3>Contact & Requests</h3>
+        </div>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-label">Investor Relations</div>
+            <a href="mailto:investors@coinofvantage.capital" class="contact-value">investors@coinofvantage.capital</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Compliance</div>
+            <a href="mailto:compliance@coinofvantage.capital" class="contact-value">compliance@coinofvantage.capital</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Subscription / Redemption</div>
+            <div class="contact-value">Submit via email, 30 days notice</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">Reporting Period</div>
+            <div class="contact-value">Monthly NAV · Quarterly Letters</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
