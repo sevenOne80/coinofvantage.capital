@@ -2,6 +2,24 @@
 {% block title %}CoinOfVantage — Digital Asset Management{% endblock %}
 {% block content %}
 
+<div class="ticker-strip">
+  <div class="ticker-inner">
+    <span class="ticker-label">Live Markets</span>
+    <div class="ticker-pair">
+      <span class="ticker-sym">BCH/USD</span>
+      <span class="ticker-price" id="bch-price">—</span>
+      <span class="ticker-change" id="bch-change">—</span>
+    </div>
+    <div class="ticker-sep">|</div>
+    <div class="ticker-pair">
+      <span class="ticker-sym">ETH/USD</span>
+      <span class="ticker-price" id="eth-price">—</span>
+      <span class="ticker-change" id="eth-change">—</span>
+    </div>
+    <span class="ticker-source">CoinGecko</span>
+  </div>
+</div>
+
 <section class="hero">
   <div class="hero-inner">
     <p class="hero-eyebrow">Trust the edge</p>
@@ -83,4 +101,37 @@
   </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function setTicker(priceId, changeId, price, change) {
+    document.getElementById(priceId).textContent = fmt(price);
+    var el = document.getElementById(changeId);
+    el.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+    el.className = 'ticker-change ' + (change >= 0 ? 'up' : 'down');
+  }
+
+  async function fetchTicker() {
+    try {
+      var res = await fetch(
+        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash,ethereum&vs_currencies=usd&include_24hr_change=true',
+        { signal: AbortSignal.timeout(8000) }
+      );
+      if (!res.ok) return;
+      var d = await res.json();
+      if (d['bitcoin-cash']) setTicker('bch-price', 'bch-change', d['bitcoin-cash'].usd, d['bitcoin-cash'].usd_24h_change);
+      if (d['ethereum'])     setTicker('eth-price', 'eth-change', d['ethereum'].usd, d['ethereum'].usd_24h_change);
+    } catch (_) {}
+  }
+
+  fetchTicker();
+  setInterval(fetchTicker, 30000);
+})();
+</script>
 {% endblock %}
